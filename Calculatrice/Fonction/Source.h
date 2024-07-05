@@ -1,6 +1,17 @@
 #pragma once 
 
+std::string input;
+
 int nb;
+int nb_1; 
+int nb_2; 
+int nb_3;
+
+std::string op;
+std::string op_1;
+std::string op_2;
+std::string op_3;
+
 int nombre_t0 = 0;
 int nombre_t1 = 0;
 int nombre_t2 = 0;
@@ -11,15 +22,14 @@ char mult  = '*';
 char divi  = '/';
 char egal  = '=';
 
-std::string input;
 
 void start() {
 	std::cout << "calculatrice beta-0.3" << std::endl;
 	std::cout << "    [+, -, *, /] " << std::endl;
 }
 
-void saut(int k){
-	for (int j = 0; j < k; j++) {
+void saut(int i){
+	for (int j = 0; j < i; j++) {
 		std::cout << std::endl;
 	}
 }
@@ -72,6 +82,7 @@ int verifop(std::string str) {
 	else {
 		str = "";
 		std::cout << "une erreur sur le string " << str << "est survenue";
+		return 10; 
 	}
 }
 
@@ -89,6 +100,10 @@ int stringToInt(const std::string& str) {
 	}
 }
 
+std::string intToString(int i) {
+	return std::to_string(i);
+}
+
 int calculoperation(int j,const std::string& str, int k) {
 	if (str == "+") {
 		return j + k ;
@@ -104,6 +119,7 @@ int calculoperation(int j,const std::string& str, int k) {
 	}
 	else {
 		std::cerr << "pb sur un operateur";
+		return 10;
 	}
 }
 
@@ -112,20 +128,33 @@ int addDigit(int nb, int add) {
 	return nb;
 }
 
-int parsing(std::string& str) {
+int parsing(std::string str) {
 	for (int i = 0; i < str.size(); i++) {
-		if (std::isdigit(str[i])) {
+		if (checknombre(str.substr(i, 1))) {
 			std::cout << "Le caractere " << str[i] << " est un chiffre.";
 			saut(1);
-			nb = addDigit(nb, stringToInt(str));
-			std::cout << nb;
-			saut(1);
-			return nb;
+			nb = addDigit(nb, stringToInt(str.substr(i, 1)));
 		}
-		else if (checksigne(str)) {
-			std::cout << "Le caractere " << str[i] << " est un operateur." << std::endl;
+		else if (checksigne(str.substr(i, 1))) {
+			std::cout << "Le caractere " << str[i] << " est un operateur.";
 			saut(1);
-			i++;
+			if (op_1 == "") {
+				op_1 = str[i];
+				nb_1 = nb;
+				nb = 0;
+			}
+			else if (op_2 == "") {
+				op_2 = str[i];
+				nb_2 = nb;
+				nb = 0;
+			}
+			else if (op_3 == "") {
+				op_3 = str[i];
+				nb_3 = nb;
+				nb = 0;
+			}		
 		}
 	}
+	
+	return 1;
 }
