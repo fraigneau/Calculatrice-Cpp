@@ -6,8 +6,8 @@ int nb;
 int nb_1; 
 int nb_2; 
 int nb_3;
-int temp_1;
-int temp_2;
+double temp_1;
+double temp_2;
 
 std::string op_1;
 std::string op_2;
@@ -73,7 +73,7 @@ int stringToInt(const std::string& str) {
 }
 
 
-int calculoperation(int j,const std::string& str, int k) {
+int calculoperation(double j,const std::string& str, double k) {
 	if (str == "+") {
 		return j + k ;
 	}
@@ -104,18 +104,23 @@ void parsing(std::string str) {
 			saut(1);
 			if (op_1 == "") {
 				op_1 = str[i];
-				pos_op_1 = i + 1;
+				pos_op_1 = i;
 				nb_1 = nb;
 				nb = 0;
 			}
 			else if (op_2 == "") {
 				op_2 = str[i];
-				pos_op_2= i + 1;
+				pos_op_2= i;
 				nb_2 = nb;
 				nb = 0;
 			}		
 		}
-		nb_3 = stringToInt(str.substr(pos_op_2 + 1, str.size()));
+		if (checksigne(op_2)) {
+			nb_3 = stringToInt(str.substr(pos_op_2 + 1, str.size()));
+		}
+		else {
+			nb_2 = stringToInt(str.substr(pos_op_1 + 1, str.size()));
+		}
 	}
 }
 
@@ -126,8 +131,11 @@ void log() {
 	saut(1);
 	std::cout << "[:] second nombre str " << nb_2;
 	saut(1);
-	std::cout << "[:] second operateur str " << op_2 << " sur la position : " << pos_op_2;
-	saut(1);
-	std::cout << "[:] troisieme nombre str " << nb_3;
-	saut(1);
+	if (checksigne(op_2)) {
+		std::cout << "[:] second operateur str " << op_2 << " sur la position : " << pos_op_2;
+		saut(1);
+		if(nb_3 != 0)
+		std::cout << "[:] troisieme nombre str " << nb_3;
+		saut(1);
+	}
 }
