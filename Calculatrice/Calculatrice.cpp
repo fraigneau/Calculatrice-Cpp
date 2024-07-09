@@ -7,8 +7,9 @@
 int main()
 {
     start();
-    //std::cin >> input;
-    input = "2/3";
+    std::cin >> input;
+    saut(2);
+    //input = "2/3";
     parsing(input);
     saut(2);
     log();
