@@ -11,10 +11,8 @@ float temp_2;
 
 std::string op_1;
 std::string op_2;
-
 int pos_op_1;
 int pos_op_2;
-
 
 char plus  = '+';
 char moins = '-';
@@ -57,7 +55,6 @@ bool signeprio(const std::string& str) {
 	return std::regex_search(str, signepriopaterne);
 }
 
-
 int stringToInt(const std::string& str) {
 	try {
 		return std::stoi(str);
@@ -73,7 +70,6 @@ int stringToInt(const std::string& str) {
 		return 0; 
 	}
 }
-
 
 float calculoperation(float j,const std::string& str, float k) {
 	if (str == "+") {
@@ -120,9 +116,9 @@ void parsing(std::string str) {
 		if (checksigne(op_2)) {
 			nb_3 = stringToInt(str.substr(pos_op_2 + 1, str.size()));
 		}
-		/*else {
+		else {
 			nb_2 = stringToInt(str.substr(pos_op_1 + 1, str.size()));
-		}*/
+		}
 	}
 }
 
