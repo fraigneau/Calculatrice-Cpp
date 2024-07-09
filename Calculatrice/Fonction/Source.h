@@ -6,8 +6,8 @@ int nb;
 int nb_1; 
 int nb_2; 
 int nb_3;
-double temp_1;
-double temp_2;
+float temp_1;
+float temp_2;
 
 std::string op_1;
 std::string op_2;
@@ -64,6 +64,8 @@ int stringToInt(const std::string& str) {
 	}
 	catch (const std::invalid_argument& e) {
 		std::cerr << "Argument invalide: " << e.what() << std::endl;
+		std::cout << str ;
+		saut(1);
 		return 0;
 	}
 	catch (const std::out_of_range& e) {
@@ -73,7 +75,7 @@ int stringToInt(const std::string& str) {
 }
 
 
-int calculoperation(double j,const std::string& str, double k) {
+float calculoperation(float j,const std::string& str, float k) {
 	if (str == "+") {
 		return j + k ;
 	}
@@ -84,7 +86,7 @@ int calculoperation(double j,const std::string& str, double k) {
 		return j * k ;
 	}
 	else if (str == "/") {
-		return j / k ;
+		return j / k;
 	}
 	else {
 		std::cerr << "pb sur un operateur";
@@ -97,7 +99,7 @@ void parsing(std::string str) {
 		if (checknombre(str.substr(i, 1))) {
 			std::cout << "Le caractere " << str[i] << " est un chiffre.";
 			saut(1);
-			nb = addDigit(nb, stringToInt(str.substr(i, 1)));
+			nb = addDigit(nb, stringToInt(str.substr(i, i+1)));
 		}
 		else if (checksigne(str.substr(i, 1))) {
 			std::cout << "Le caractere " << str[i] << " est un operateur.";
@@ -118,9 +120,9 @@ void parsing(std::string str) {
 		if (checksigne(op_2)) {
 			nb_3 = stringToInt(str.substr(pos_op_2 + 1, str.size()));
 		}
-		else {
+		/*else {
 			nb_2 = stringToInt(str.substr(pos_op_1 + 1, str.size()));
-		}
+		}*/
 	}
 }
 

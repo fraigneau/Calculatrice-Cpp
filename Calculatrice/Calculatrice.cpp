@@ -1,18 +1,20 @@
 #include <iostream>
 #include <string>
 #include <regex>
+#include <iomanip>
 #include "Fonction/source.h"
 
 int main()
 {
     start();
     //std::cin >> input;
-    input = "1+2+3";
+    input = "2/3";
     parsing(input);
     saut(2);
     log();
+    
 
-    saut(5);
+    saut(2);
 
     for (int i = 0; i < input.size(); i++) {
         if (signeprio(op_2)) {
